@@ -1,16 +1,19 @@
 package com.derec.nexus_solutions_plataform.service;
 
 import com.derec.nexus_solutions_plataform.model.Product;
+import com.derec.nexus_solutions_plataform.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
-    public static List<Product> products = List.of(new Product(1L, "Cano pvc"));
 
-    public void list(){
-        System.out.println(products.toString());
+    private final ProductRepository productRepository;
+
+    public List<Product> list(){
+        return productRepository.findAll();
     }
 }
