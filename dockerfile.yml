@@ -1,10 +1,12 @@
-FROM maven:3.8.6-amazoncorretto-17 as build
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 COPY . .
 RUN mvn clean package -DskipTests
   
-FROM openjdk:17-slim
+  # Etapa de runtime com Java 21
+FROM eclipse-temurin:21-jdk
 WORKDIR /app
 COPY --from=build /app/target/*.jar springdeskcurso.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "springdeskcurso.jar"]
+
